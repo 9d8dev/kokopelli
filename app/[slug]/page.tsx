@@ -19,7 +19,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   // @ts-ignore
   const blocks = await getBlocks(page?.id);
   // @ts-ignore
-  const title = page.properties?.name?.title[0]?.text?.content;
+  const title = page.properties?.name?.title[0]?.plain_text;
 
   if (!page || !blocks) {
     return <div />;
@@ -34,6 +34,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
             <Fragment key={block.id}>{renderBlock(block)}</Fragment>
           ))}
         </section>
+        {/* @ts-ignore */}
+        <a href={page.properties?.url?.url}>{page.properties?.url?.url}</a>
       </article>
     </div>
   );

@@ -1,38 +1,19 @@
 import { Fragment } from "react";
 import Link from "next/link";
 
-import Text from "@/components/text";
-import styles from "@/styles/post.module.css";
-
 export function renderBlock(block: any) {
   const { type, id } = block;
   const value = block[type];
 
   switch (type) {
     case "paragraph":
-      return (
-        <p>
-          <Text title={value.rich_text} />
-        </p>
-      );
+      return <p>{value.rich_text.map((text: any) => text.plain_text)}</p>;
     case "heading_1":
-      return (
-        <h1>
-          <Text title={value.rich_text} />
-        </h1>
-      );
+      return <h1>{value.rich_text.map((text: any) => text.plain_text)}</h1>;
     case "heading_2":
-      return (
-        <h2>
-          <Text title={value.rich_text} />
-        </h2>
-      );
+      return <h2>{value.rich_text.map((text: any) => text.plain_text)}</h2>;
     case "heading_3":
-      return (
-        <h3>
-          <Text title={value.rich_text} />
-        </h3>
-      );
+      return <h3>{value.rich_text.map((text: any) => text.plain_text)}</h3>;
     case "bulleted_list": {
       return <ul>{value.children.map((child: any) => renderBlock(child))}</ul>;
     }
@@ -43,7 +24,7 @@ export function renderBlock(block: any) {
     case "numbered_list_item":
       return (
         <li key={block.id}>
-          <Text title={value.rich_text} />
+          {value.rich_text.map((text: any) => text.plain_text)}
           {/* eslint-disable-next-line no-use-before-define */}
           {!!value.children && renderNestedList(block)}
         </li>
@@ -53,7 +34,7 @@ export function renderBlock(block: any) {
         <div>
           <label htmlFor={id}>
             <input type="checkbox" id={id} defaultChecked={value.checked} />{" "}
-            <Text title={value.rich_text} />
+            {value.rich_text.map((text: any) => text.plain_text)}
           </label>
         </div>
       );
@@ -61,7 +42,7 @@ export function renderBlock(block: any) {
       return (
         <details>
           <summary>
-            <Text title={value.rich_text} />
+            {value.rich_text.map((text: any) => text.plain_text)}
           </summary>
           {block.children?.map((child: any) => (
             <Fragment key={child.id}>{renderBlock(child)}</Fragment>
@@ -70,7 +51,7 @@ export function renderBlock(block: any) {
       );
     case "child_page":
       return (
-        <div className={styles.childPage}>
+        <div>
           <strong>{value?.title}</strong>
           {block.children.map((child: any) => renderBlock(child))}
         </div>
@@ -89,12 +70,16 @@ export function renderBlock(block: any) {
     case "divider":
       return <hr key={id} />;
     case "quote":
-      return <blockquote key={id}>{value.rich_text[0].plain_text}</blockquote>;
+      return (
+        <blockquote key={id}>
+          {value.rich_text.map((text: any) => text.plain_text)}
+        </blockquote>
+      );
     case "code":
       return (
-        <pre className={styles.pre}>
-          <code className={styles.code_block} key={id}>
-            {value.rich_text[0].plain_text}
+        <pre>
+          <code key={id}>
+            {value.rich_text.map((text: any) => text.plain_text)}
           </code>
         </pre>
       );
@@ -106,10 +91,10 @@ export function renderBlock(block: any) {
       const captionFile = value.caption ? value.caption[0]?.plain_text : "";
       return (
         <figure>
-          <div className={styles.file}>
+          <div>
             📎{" "}
             <Link href={srcFile} passHref>
-              {lastElementInArray.split("?")[0]}
+              <a>{lastElementInArray.split("?")[0]}</a>
             </Link>
           </div>
           {captionFile && <figcaption>{captionFile}</figcaption>}
@@ -119,19 +104,14 @@ export function renderBlock(block: any) {
     case "bookmark": {
       const href = value.url;
       return (
-        <a
-          href={href}
-          target="_blank"
-          rel="noreferrer noopener"
-          className={styles.bookmark}
-        >
+        <a href={href} target="_blank" rel="noreferrer noopener">
           {href}
         </a>
       );
     }
     case "table": {
       return (
-        <table className={styles.table}>
+        <table>
           <tbody>
             {block.children?.map((child: any, index: any) => {
               const RowElement =
@@ -139,9 +119,8 @@ export function renderBlock(block: any) {
               return (
                 <tr key={child.id}>
                   {child.table_row?.cells?.map((cell: any, i: any) => (
-                    // eslint-disable-next-line react/no-array-index-key
                     <RowElement key={`${cell.plain_text}-${i}`}>
-                      <Text title={cell} />
+                      {cell.plain_text}
                     </RowElement>
                   ))}
                 </tr>
@@ -153,7 +132,7 @@ export function renderBlock(block: any) {
     }
     case "column_list": {
       return (
-        <div className={styles.row}>
+        <div>
           {block.children.map((childBlock: any) => renderBlock(childBlock))}
         </div>
       );
