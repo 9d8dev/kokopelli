@@ -3,6 +3,7 @@ import { QueryDatabaseResponse } from "@notionhq/client/build/src/api-endpoints"
 import Link from "next/link";
 import Image from "next/image";
 import Hero from "@/components/hero";
+import Grid from "@/components/grid";
 
 export default async function Home() {
   const data: QueryDatabaseResponse = await notion.databases.query({
@@ -14,7 +15,7 @@ export default async function Home() {
       <Hero title="Welcome to Kokopelli">
         A next js and notion starter theme.
       </Hero>
-      <div>
+      <Grid>
         {data.results.map((result: any) => (
           <div key={result?.properties?.id?.unique_id?.number}>
             <div className="h-52 w-full overflow-hidden">
@@ -53,7 +54,7 @@ export default async function Home() {
             </Link>
           </div>
         ))}
-      </div>
+      </Grid>
     </main>
   );
 }

@@ -21,9 +21,11 @@ export default function RootLayout({
       lang="en"
       className="bg-secondary-100 dark:bg-secondary-800 antialiased text-secondary-900 dark:text-secondary-100 font-light"
     >
-      <Nav></Nav>
-      <body className={inter.className}>{children}</body>
-      <Footer></Footer>
+      <body className={inter.className}>
+        <Nav />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

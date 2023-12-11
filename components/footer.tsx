@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer>
+    <footer className="p-6 max-w-7xl m-auto">
       <p>Hello World</p>
     </footer>
   );

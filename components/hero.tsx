@@ -1,3 +1,5 @@
+import Section from "./section";
+
 type HeroProps = {
   title: string;
   children: React.ReactNode;
@@ -5,10 +7,10 @@ type HeroProps = {
 
 const Hero: React.FC<HeroProps> = ({ title, children }) => {
   return (
-    <div>
+    <Section>
       <h1>{title}</h1>
       <h2>{children}</h2>
-    </div>
+    </Section>
   );
 };
 
