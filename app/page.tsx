@@ -10,8 +10,7 @@ export default async function Home() {
 
   return (
     <main>
-      <div className="">
-        {/* TO-DO: Update this to the correct type to avoid using 'any' */}
+      <div>
         {data.results.map((result: any) => (
           <div key={result?.properties?.id?.unique_id?.number}>
             <div className="h-52 w-full overflow-hidden">
@@ -27,6 +26,16 @@ export default async function Home() {
             <p>updated: {result.properties?.updated_at?.last_edited_time}</p>
             <p>created: {result.properties?.created_at?.created_time}</p>
             <p>status: {result.properties?.status?.select?.name}</p>
+            <div>
+              tags:{" "}
+              {result.properties?.tags?.multi_select?.map(
+                (tag: Tag, index: number) => (
+                  <span key={index} className="tag">
+                    {tag.name}
+                  </span>
+                )
+              )}
+            </div>
             <p>
               description:{" "}
               {result.properties?.description?.rich_text[0]?.text?.content}
