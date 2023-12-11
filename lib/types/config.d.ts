@@ -5,7 +5,6 @@ type kokopelliTypes = {
   site_title: string;
   site_description: string;
   posts_per_page: number;
-  wordpress_url: string;
   google_analytics_id: string;
   revalidate: number;
   links: {

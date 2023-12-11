@@ -6,7 +6,6 @@ const kokopelli: kokopelliTypes = {
   site_description:
     "kokopelli is an opinionated Next JS and Wordpress starter. It's built to be a solid foundation for your next project.",
   posts_per_page: 6,
-  wordpress_url: "https://windpress.wpenginepowered.com",
   google_analytics_id: "G-7VM8KZENP7",
   revalidate: 3600, // revalidate the wordpressse time in seconds
 

@@ -2,6 +2,7 @@ import { notion } from "@/lib/notion";
 import { QueryDatabaseResponse } from "@notionhq/client/build/src/api-endpoints";
 import Link from "next/link";
 import Image from "next/image";
+import Hero from "@/components/hero";
 
 export default async function Home() {
   const data: QueryDatabaseResponse = await notion.databases.query({
@@ -10,6 +11,9 @@ export default async function Home() {
 
   return (
     <main>
+      <Hero title="Welcome to Kokopelli">
+        A next js and notion starter theme.
+      </Hero>
       <div>
         {data.results.map((result: any) => (
           <div key={result?.properties?.id?.unique_id?.number}>
