@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Manrope } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 
-const inter = Inter({ subsets: ["latin"] });
+const manrope = Manrope({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,7 +21,7 @@ export default function RootLayout({
       lang="en"
       className="bg-secondary-100 dark:bg-secondary-800 antialiased text-secondary-900 dark:text-secondary-100 font-light"
     >
-      <body className={inter.className}>
+      <body className={manrope.className}>
         <Nav />
         {children}
         <Footer />

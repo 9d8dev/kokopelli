@@ -22,8 +22,8 @@ const kokopelli: kokopelliTypes = {
   },
 
   theme: {
-    primary: "blue",
-    secondary: "neutral",
+    primary: "purple",
+    secondary: "gray",
     logo: "../logo.svg",
     primary_logo: "../dark_logo.svg",
     dark_mode_logo: "../light_logo.svg",

@@ -12,8 +12,12 @@ export default async function Home() {
 
   return (
     <main>
-      <Hero title="Welcome to Kokopelli">
-        A next js and notion starter theme.
+      <Hero
+        title="Explore Kokopelli"
+        cta="Get Started"
+        cta_link="https://kokopelli.dev"
+      >
+        Discover the seamless integration of Next.js with Notion.
       </Hero>
       <Grid>
         {data.results.map(
