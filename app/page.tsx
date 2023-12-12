@@ -16,44 +16,48 @@ export default async function Home() {
         A next js and notion starter theme.
       </Hero>
       <Grid>
-        {data.results.map((result: any) => (
-          <div key={result?.properties?.id?.unique_id?.number}>
-            <div className="h-52 w-full overflow-hidden">
-              <Image
-                src={result.properties?.image?.files[0]?.file?.url}
-                alt={`Image for ${result.properties?.name?.title[0]?.text?.content}`}
-                width={700}
-                height={500}
-                className="object-cover object-center w-full h-full"
-              />
-            </div>
-            <p>ID: {result.properties?.id?.unique_id?.number}</p>
-            <p>updated: {result.properties?.updated_at?.last_edited_time}</p>
-            <p>created: {result.properties?.created_at?.created_time}</p>
-            <p>status: {result.properties?.status?.select?.name}</p>
-            <div>
-              tags:{" "}
-              {result.properties?.tags?.multi_select?.map(
-                (tag: Tag, index: number) => (
-                  <span key={index} className="tag">
-                    {tag.name}
-                  </span>
-                )
-              )}
-            </div>
-            <p>
-              description:{" "}
-              {result.properties?.description?.rich_text[0]?.text?.content}
-            </p>
-            <p>url: {result.properties?.url?.url}</p>
-            <p>name: {result.properties?.name?.title[0]?.text?.content}</p>
-            <Link
-              href={`/${result.properties?.slug?.rich_text[0]?.text?.content}`}
-            >
-              slug: {result.properties?.slug?.rich_text[0]?.text?.content}
-            </Link>
-          </div>
-        ))}
+        {data.results.map(
+          (result: any) =>
+            result.properties?.status?.select?.name === "Published" && (
+              <Link
+                className="grid transition-all gap-4 group hover:-mt-2 hover:mb-2"
+                key={result?.properties?.id?.unique_id?.number}
+                href={`/${result.properties?.slug?.rich_text[0]?.text?.content}`}
+              >
+                {/* Featured Image */}
+                <div className="h-52 w-full rounded-md overflow-hidden">
+                  <Image
+                    src={result.properties?.image?.files[0]?.file?.url}
+                    alt={`Image for ${result.properties?.name?.title[0]?.text?.content}`}
+                    width={700}
+                    height={500}
+                    className="object-cover object-center w-full h-full"
+                  />
+                </div>
+                {/* Title */}
+                <h3 className="text-2xl">
+                  {result.properties?.name?.title[0]?.text?.content}
+                </h3>
+                {/* Description */}
+                <p>
+                  {result.properties?.description?.rich_text[0]?.text?.content}
+                </p>
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2">
+                  {result.properties?.tags?.multi_select?.map(
+                    (tag: Tag, index: number) => (
+                      <span
+                        key={index}
+                        className="bg-secondary-200 dark:bg-secondary-700 px-2 text-sm py-1 rounded-md"
+                      >
+                        {tag.name}
+                      </span>
+                    )
+                  )}
+                </div>
+              </Link>
+            )
+        )}
       </Grid>
     </main>
   );
