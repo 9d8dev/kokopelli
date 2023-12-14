@@ -7,7 +7,7 @@ interface GridProps {
 
 const Grid: React.FC<GridProps> = ({ children, className }) => {
   return (
-    <Section>
+    <Section className="px-0">
       <div className={`grid gap-6 sm:grid-cols-2 md:grid-cols-3 ${className}`}>
         {children}
       </div>

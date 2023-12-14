@@ -15,7 +15,7 @@ const Hero: React.FC<HeroProps> = ({ title, children, cta, cta_link }) => {
         href={cta_link}
         className="flex gap-1 text-xs items-center m-auto border w-fit rounded-lg px-2 py-1 opacity-80 hover:opacity-100 transition-all"
       >
-        Discover the headless Notion using Next JS <ArrowRightIcon />
+        Discover headless Notion using Next JS <ArrowRightIcon />
       </a>
       <h1 className="text-6xl font-normal max-w-2xl">{title}</h1>
       <h2>{children}</h2>

@@ -6,7 +6,7 @@ import Hero from "@/components/hero";
 import Grid from "@/components/grid";
 
 export default async function Home() {
-  const data: QueryDatabaseResponse = await notion.databases.query({
+  const data = await notion.databases.query({
     database_id: process.env.DATABASE_ID,
   });
 
@@ -21,7 +21,7 @@ export default async function Home() {
       </Hero>
       <Grid>
         {data.results.map(
-          (result: any) =>
+          (result) =>
             result.properties?.status?.select?.name === "Published" && (
               <Link
                 className="grid transition-all gap-4 group hover:-mt-2 hover:mb-2"
@@ -48,16 +48,14 @@ export default async function Home() {
                 </p>
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2">
-                  {result.properties?.tags?.multi_select?.map(
-                    (tag: Tag, index: number) => (
-                      <span
-                        key={index}
-                        className="bg-secondary-200 dark:bg-secondary-700 px-2 text-sm py-1 rounded-md"
-                      >
-                        {tag.name}
-                      </span>
-                    )
-                  )}
+                  {result.properties?.tags?.multi_select?.map((tag, index) => (
+                    <span
+                      key={index}
+                      className="bg-secondary-200 dark:bg-secondary-700 px-2 text-sm py-1 rounded-md"
+                    >
+                      {tag.name}
+                    </span>
+                  ))}
                 </div>
               </Link>
             )
