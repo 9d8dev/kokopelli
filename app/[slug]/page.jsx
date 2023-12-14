@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { getDatabase, getBlocks, getPageFromSlug } from "@/lib/notion-block";
 import { renderBlock } from "@/components/notion-render";
+import Section from "@/components/section";
 
 export async function generateStaticParams() {
   const database = await getDatabase();
@@ -22,14 +23,12 @@ export default async function Page({ params }) {
   }
 
   return (
-    <div>
+    <div className="flex flex-col items-center max-w-7xl">
       <article className="prose prose-headings:font-normal prose-p:font-light dark:prose-invert">
         <h1>{title}</h1>
-        <section>
-          {blocks.map((block) => (
-            <Fragment key={block.id}>{renderBlock(block)}</Fragment>
-          ))}
-        </section>
+        {blocks.map((block) => (
+          <Fragment key={block.id}>{renderBlock(block)}</Fragment>
+        ))}
         <a href={page.properties?.url?.url}>{page.properties?.url?.url}</a>
       </article>
     </div>
